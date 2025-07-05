@@ -18,7 +18,6 @@ export default function Footer() {
       ],
     Conexiones: [
       { name: 'Centro de Control', href: '/admin' },
-      { name: 'Señal RSS', href: '/feed.xml' },
       { name: 'LinkedIn', href: 'https://www.linkedin.com/in/christopher-salvo-18499793/' },
     ],
   }
