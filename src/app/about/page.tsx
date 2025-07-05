@@ -15,7 +15,7 @@ export default function AboutPage() {
         <section className="max-w-2xl w-full bg-white/90 dark:bg-gray-900/90 rounded-3xl shadow-xl p-8 md:p-12 flex flex-col items-center gap-6 border border-indigo-100 dark:border-indigo-900 relative overflow-hidden animate-fade-in">
           <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-blue-200 to-indigo-300 dark:from-blue-900 dark:to-indigo-800 rounded-full blur-2xl opacity-40 pointer-events-none" />
           <Image
-            src="/foto.png"
+            src="/foto.jpg"
             alt="Foto de Christopher Salvo"
             width={120}
             height={120}
