@@ -17,6 +17,7 @@ interface SearchParams {
   buscar?: string
   categoria?: string
   orden?: string
+  page?: string
 }
 
 interface PageProps {
@@ -24,7 +25,12 @@ interface PageProps {
 }
 
 export default async function ExploracionesPage({ searchParams }: PageProps) {
-  const { buscar, categoria, orden } = await searchParams
+  const { buscar, categoria, orden, page } = await searchParams
+
+  // Paginación
+  const pageSize = 6
+  const currentPage = Math.max(1, parseInt(page || '1', 10))
+  const skip = (currentPage - 1) * pageSize
 
   // Construir filtros de búsqueda
   const whereCondition: {
@@ -60,10 +66,12 @@ export default async function ExploracionesPage({ searchParams }: PageProps) {
   }
 
   // Obtener posts y categorías
-  const [posts, categorias] = await Promise.all([
+  const [posts, totalPosts, categorias] = await Promise.all([
     db.post.findMany({
       where: whereCondition,
       orderBy,
+      skip,
+      take: pageSize,
       select: {
         id: true,
         title: true,
@@ -79,6 +87,7 @@ export default async function ExploracionesPage({ searchParams }: PageProps) {
         publishedAt: true,
       }
     }),
+    db.post.count({ where: whereCondition }),
     db.post.groupBy({
       by: ['category'],
       where: { published: true },
@@ -86,6 +95,7 @@ export default async function ExploracionesPage({ searchParams }: PageProps) {
       orderBy: { _count: { category: 'desc' } },
     })
   ])
+  const totalPages = Math.ceil(totalPosts / pageSize)
 
   return (
     <>
@@ -121,7 +131,7 @@ export default async function ExploracionesPage({ searchParams }: PageProps) {
               <div className="flex justify-center items-center space-x-8 pt-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                    {posts.length}
+                    {totalPosts}
                   </div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">
                     {buscar || categoria !== 'todas' ? 'Encontradas' : 'Aventuras'}
@@ -257,74 +267,75 @@ export default async function ExploracionesPage({ searchParams }: PageProps) {
         </section>
 
         {/* Grid de Posts */}
-        <section className="py-12">
+        <section className="py-8">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            {posts.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {posts.map((post) => (
-                  <article key={post.id} className="group">
-                    <div className="relative h-48 rounded-xl overflow-hidden mb-4">
-                      <Image
-                        src={post.imageUrl}
-                        alt={post.imageAlt}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      
-                      {/* Badge de categoría */}
-                      <div className="absolute top-4 left-4">
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/90 text-gray-900 backdrop-blur-sm">
-                          {post.category}
-                        </span>
-                      </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {posts.map((post) => (
+                <article key={post.id} className="group">
+                  <div className="relative h-48 rounded-xl overflow-hidden mb-4">
+                    <Image
+                      src={post.imageUrl}
+                      alt={post.imageAlt}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    
+                    {/* Badge de categoría */}
+                    <div className="absolute top-4 left-4">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/90 text-gray-900 backdrop-blur-sm">
+                        {post.category}
+                      </span>
                     </div>
+                  </div>
 
-                    <div className="space-y-3">
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-tight">
-                        <Link href={`/posts/${post.slug}`}>
-                          {post.title}
-                        </Link>
-                      </h3>
+                  <div className="space-y-3">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-tight">
+                      <Link href={`/posts/${post.slug}`}>
+                        {post.title}
+                      </Link>
+                    </h3>
+                    
+                    <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                      {post.summary.substring(0, 120)}...
+                    </p>
+                    
+                    <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 pt-2 border-t border-gray-100 dark:border-gray-800">
+                      <span>{formatRelativeTime(post.publishedAt || post.createdAt)}</span>
                       
-                      <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                        {post.summary.substring(0, 120)}...
-                      </p>
-                      
-                      <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 pt-2 border-t border-gray-100 dark:border-gray-800">
-                        <span>{formatRelativeTime(post.publishedAt || post.createdAt)}</span>
-                        
-                        <div className="flex items-center space-x-3">
-                          <div className="flex items-center space-x-1">
-                            <EyeIcon className="h-3 w-3" />
-                            <span>{post.views.toLocaleString()}</span>
-                          </div>
-                          <div className="flex items-center space-x-1">
-                            <HeartIcon className="h-3 w-3" />
-                            <span>{post.likes.toLocaleString()}</span>
-                          </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="flex items-center space-x-1">
+                          <EyeIcon className="h-3 w-3" />
+                          <span>{post.views.toLocaleString()}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <HeartIcon className="h-3 w-3" />
+                          <span>{post.likes.toLocaleString()}</span>
                         </div>
                       </div>
                     </div>
-                  </article>
+                  </div>
+                </article>
+              ))}
+            </div>
+            {/* Paginación */}
+            {totalPages > 1 && (
+              <div className="flex justify-center mt-12 gap-2">
+                {Array.from({ length: totalPages }, (_, i) => (
+                  <Link
+                    key={i}
+                    href={`/exploraciones?${new URLSearchParams({
+                      ...(buscar ? { buscar } : {}),
+                      ...(categoria ? { categoria } : {}),
+                      ...(orden ? { orden } : {}),
+                      page: (i + 1).toString(),
+                    }).toString()}`}
+                    className={`px-4 py-2 rounded-lg font-medium border transition-colors ${currentPage === i + 1
+                      ? 'bg-blue-600 text-white border-blue-600'
+                      : 'bg-white dark:bg-gray-800 text-blue-600 border-blue-300 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-700'}`}
+                  >
+                    {i + 1}
+                  </Link>
                 ))}
-              </div>
-            ) : (
-              <div className="text-center py-16">
-                <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <MagnifyingGlassIcon className="h-8 w-8 text-gray-400" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                  No se encontraron aventuras
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-6">
-                  Intenta ajustar tus filtros o buscar otros términos.
-                </p>
-                <Link
-                  href="/exploraciones"
-                  className="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-colors"
-                >
-                  Ver todas las exploraciones
-                </Link>
               </div>
             )}
           </div>
