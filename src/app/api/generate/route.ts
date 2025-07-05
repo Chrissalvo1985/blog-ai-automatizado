@@ -21,18 +21,23 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { topic, autoPublish = false } = body
+    const { topic, context, customContent, autoPublish = false } = body
 
-    if (!topic) {
-      console.error('❌ No topic provided')
+    if (!topic && !customContent) {
+      console.error('❌ No topic or customContent provided')
       return NextResponse.json(
-        { error: 'Topic is required' },
+        { error: 'Se requiere un tema o contenido propio' },
         { status: 400 }
       )
     }
 
-    console.log('🎯 Topic:', topic)
+    // Si no hay topic pero hay customContent, usamos customContent como topic base
+    const effectiveTopic = topic || customContent
+
+    console.log('🎯 Topic:', effectiveTopic)
     console.log('📤 Auto publish:', autoPublish)
+    console.log('📝 Context:', context)
+    console.log('📝 CustomContent:', customContent)
 
     // Check environment variables
     if (!process.env.OPENAI_API_KEY) {
@@ -51,7 +56,7 @@ export async function POST(request: NextRequest) {
     console.log('📊 Creating generation log...')
     const generationLog = await db.generationLog.create({
       data: {
-        topic,
+        topic: effectiveTopic,
         status: 'generating',
       },
     })
@@ -60,7 +65,7 @@ export async function POST(request: NextRequest) {
     try {
       // Generate content using OpenAI
       console.log('🤖 Generating content with OpenAI...')
-      const generatedContent = await generateBlogPost(topic)
+      const generatedContent = await generateBlogPost(effectiveTopic, context, customContent)
       console.log('✅ Content generated:', {
         title: generatedContent.title,
         category: generatedContent.category,
@@ -69,7 +74,7 @@ export async function POST(request: NextRequest) {
       
       // Get image from Unsplash
       console.log('🖼️ Getting image from Unsplash...')
-      const image = await getImageForTopic(topic)
+      const image = await getImageForTopic(effectiveTopic)
       console.log('✅ Image obtained:', image.url)
       
       // Create slug from title

@@ -12,12 +12,19 @@ export interface GeneratedContent {
   category: string
 }
 
-export async function generateBlogPost(topic: string): Promise<GeneratedContent> {
+export async function generateBlogPost(topic: string, context?: string, customContent?: string): Promise<GeneratedContent> {
   console.log('🤖 OpenAI: Starting content generation for topic:', topic)
-  
-  const prompt = `Escribe un artículo de blog completo y profesional sobre "${topic}". 
-  
-  Requisitos:
+  if (context) console.log('📝 Context:', context)
+  if (customContent) console.log('📝 CustomContent:', customContent)
+
+  let prompt = `Escribe un artículo de blog completo y profesional sobre "${topic}".`
+  if (context) {
+    prompt += `\n\nTipo de nota: ${context}. Ajusta el tono, estructura y enfoque para que sea una ${context}.`
+  }
+  if (customContent) {
+    prompt += `\n\nIncorpora el siguiente contenido proporcionado por el autor de forma natural en el artículo (puede ser como bloque, cita, reflexión, ejemplo, etc):\n"""${customContent}"""\nNo ignores ni omitas este contenido.`
+  }
+  prompt += `\n\nRequisitos:
   - Escribe en español con un tono profesional y atractivo
   - Incluye insights accionables y consejos prácticos
   - Usa formato markdown con encabezados, listas y énfasis
@@ -25,15 +32,13 @@ export async function generateBlogPost(topic: string): Promise<GeneratedContent>
   - Hazlo amigable para SEO con integración natural de palabras clave
   - Incluye una introducción atractiva y una conclusión sólida
   - Enfócate en contenido relevante para audiencia hispanohablante
-  
-  Estructura tu respuesta como un objeto JSON con los siguientes campos:
+  \nEstructura tu respuesta como un objeto JSON con los siguientes campos:
   - title: Un título atractivo y optimizado para SEO (máximo 60 caracteres)
   - summary: Un resumen breve/meta descripción (máximo 160 caracteres)
   - content: El contenido completo del artículo en formato markdown
   - tags: Un array de 3-5 etiquetas relevantes en español
   - category: Una sola categoría que mejor se ajuste al contenido
-  
-  Categorías disponibles: Tecnología, Estilo de Vida, Negocios, Salud, Viajes, Comida, Ciencia, Entretenimiento, Educación, Finanzas`
+  \nCategorías disponibles: Tecnología, Estilo de Vida, Negocios, Salud, Viajes, Comida, Ciencia, Entretenimiento, Educación, Finanzas`
 
   try {
     console.log('🤖 OpenAI: Making API call...')
