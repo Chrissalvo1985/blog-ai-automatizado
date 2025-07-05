@@ -51,6 +51,12 @@ export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [password, setPassword] = useState('')
   const [authError, setAuthError] = useState('')
+  const [postsPage, setPostsPage] = useState(1)
+  const [postsPageSize] = useState(20)
+  const [postsTotal, setPostsTotal] = useState(0)
+  const [logsPage, setLogsPage] = useState(1)
+  const [logsPageSize] = useState(20)
+  const [logsTotal, setLogsTotal] = useState(0)
 
   useEffect(() => {
     // Check if already authenticated
@@ -85,21 +91,23 @@ export default function AdminPage() {
     setPassword('')
   }
 
-  const fetchData = async () => {
+  const fetchData = async (customPostsPage = postsPage, customLogsPage = logsPage) => {
     try {
       const [postsRes, logsRes] = await Promise.all([
-        fetch('/api/posts'),
-        fetch('/api/logs')
+        fetch(`/api/posts?page=${customPostsPage}&pageSize=${postsPageSize}`),
+        fetch(`/api/logs?page=${customLogsPage}&pageSize=${logsPageSize}`)
       ])
       
       if (postsRes.ok) {
         const postsData = await postsRes.json()
         setPosts(postsData.posts || [])
+        setPostsTotal(postsData.total || 0)
       }
       
       if (logsRes.ok) {
         const logsData = await logsRes.json()
         setLogs(logsData.logs || [])
+        setLogsTotal(logsData.total || 0)
       }
     } catch (error) {
       console.error('Error fetching data:', error)
@@ -186,7 +194,36 @@ export default function AdminPage() {
     }
   }
 
+  useEffect(() => {
+    if (isAuthenticated) fetchData(postsPage, logsPage)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [postsPage, logsPage, isAuthenticated])
 
+  function Pagination({ page, pageSize, total, onPageChange }: { page: number, pageSize: number, total: number, onPageChange: (p: number) => void }) {
+    const totalPages = Math.ceil(total / pageSize)
+    if (totalPages <= 1) return null
+    const pages = []
+    for (let i = 1; i <= totalPages; i++) {
+      if (i === 1 || i === totalPages || Math.abs(i - page) <= 2) {
+        pages.push(i)
+      } else if (pages[pages.length - 1] !== '...') {
+        pages.push('...')
+      }
+    }
+    return (
+      <div className="flex items-center justify-center gap-2 py-4">
+        <button onClick={() => onPageChange(1)} disabled={page === 1} className="px-2 py-1 text-sm rounded disabled:opacity-50">{'<<'}</button>
+        <button onClick={() => onPageChange(page - 1)} disabled={page === 1} className="px-2 py-1 text-sm rounded disabled:opacity-50">{'<'}</button>
+        {pages.map((p, idx) => typeof p === 'number' ? (
+          <button key={p} onClick={() => onPageChange(p)} className={`px-2 py-1 text-sm rounded ${p === page ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100'}`}>{p}</button>
+        ) : (
+          <span key={idx} className="px-2 py-1 text-sm text-gray-400">...</span>
+        ))}
+        <button onClick={() => onPageChange(page + 1)} disabled={page === totalPages} className="px-2 py-1 text-sm rounded disabled:opacity-50">{'>'}</button>
+        <button onClick={() => onPageChange(totalPages)} disabled={page === totalPages} className="px-2 py-1 text-sm rounded disabled:opacity-50">{'>>'}</button>
+      </div>
+    )
+  }
 
   if (loading) {
     return (
@@ -461,6 +498,7 @@ export default function AdminPage() {
                 </tbody>
               </table>
             </div>
+            <Pagination page={postsPage} pageSize={postsPageSize} total={postsTotal} onPageChange={p => { setPostsPage(p); setLoading(true); }} />
           </div>
 
           {/* Generation Logs */}
@@ -532,6 +570,7 @@ export default function AdminPage() {
                 </tbody>
               </table>
             </div>
+            <Pagination page={logsPage} pageSize={logsPageSize} total={logsTotal} onPageChange={p => { setLogsPage(p); setLoading(true); }} />
           </div>
         </div>
       </main>
