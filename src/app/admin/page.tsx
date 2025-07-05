@@ -57,6 +57,8 @@ export default function AdminPage() {
   const [logsPage, setLogsPage] = useState(1)
   const [logsPageSize] = useState(5)
   const [logsTotal, setLogsTotal] = useState(0)
+  const [contextType, setContextType] = useState('noticia')
+  const [customContent, setCustomContent] = useState('')
 
   useEffect(() => {
     // Check if already authenticated
@@ -138,13 +140,15 @@ export default function AdminPage() {
         },
         body: JSON.stringify({
           topic: topic || undefined,
+          context: contextType,
+          customContent: customContent || undefined,
           autoPublish: true,
         }),
       })
-
       if (response.ok) {
         await fetchData()
         setCustomTopic('')
+        setCustomContent('')
       } else {
         const error = await response.json()
         alert(`Error: ${error.error}`)
@@ -372,13 +376,28 @@ export default function AdminPage() {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Tema Personalizado (opcional)
+                  Contexto del artículo
                 </label>
-                <input
-                  type="text"
-                  value={customTopic}
-                  onChange={(e) => setCustomTopic(e.target.value)}
-                  placeholder="Ingresa un tema o déjalo en blanco para uno aleatorio"
+                <select
+                  value={contextType}
+                  onChange={e => setContextType(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
+                >
+                  <option value="noticia">Noticia</option>
+                  <option value="reflexion">Reflexión</option>
+                  <option value="tutorial">Tutorial</option>
+                  <option value="otro">Otro</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Contenido propio (opcional)
+                </label>
+                <textarea
+                  value={customContent}
+                  onChange={e => setCustomContent(e.target.value)}
+                  placeholder="Agrega aquí tu texto, ideas, párrafos o instrucciones para que la IA los integre en la nota."
+                  rows={4}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
                 />
               </div>
