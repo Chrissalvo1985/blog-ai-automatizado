@@ -9,10 +9,10 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Categories', href: '/categories' },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'Inicio', href: '/' },
+    { name: 'Categorías', href: '/categories' },
+    { name: 'Acerca de', href: '/about' },
+    { name: 'Contacto', href: '/contact' },
   ]
 
   return (
@@ -26,7 +26,7 @@ export default function Header() {
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full animate-pulse" />
             </div>
             <span className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-              AutoBlog
+              Blog IA
             </span>
           </Link>
 

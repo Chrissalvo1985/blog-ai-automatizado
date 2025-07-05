@@ -1,195 +1,163 @@
 export interface UnsplashImage {
-  id: string
   url: string
   alt: string
   photographer: string
   photographerUrl: string
-  downloadUrl: string
 }
 
-// Predefined high-quality images for different topics
+// Imágenes predefinidas de alta calidad para diferentes temas
 const topicImages: Record<string, UnsplashImage[]> = {
-  technology: [
+  tecnologia: [
     {
-      id: 'tech-1',
       url: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&q=80',
-      alt: 'Modern technology and coding',
+      alt: 'Tecnología moderna y programación',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
-      downloadUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&q=80',
     },
     {
-      id: 'tech-2',
       url: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80',
-      alt: 'Programming and development',
+      alt: 'Programación y desarrollo',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
-      downloadUrl: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80',
     },
     {
-      id: 'tech-3',
       url: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&q=80',
-      alt: 'AI and machine learning',
+      alt: 'IA y aprendizaje automático',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
-      downloadUrl: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&q=80',
     },
   ],
-  business: [
+  negocios: [
     {
-      id: 'business-1',
       url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
-      alt: 'Business and entrepreneurship',
+      alt: 'Negocios y emprendimiento',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
-      downloadUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
     },
     {
-      id: 'business-2',
       url: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80',
-      alt: 'Team collaboration',
+      alt: 'Colaboración en equipo',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
-      downloadUrl: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80',
     },
     {
-      id: 'business-3',
       url: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80',
-      alt: 'Business strategy',
+      alt: 'Estrategia empresarial',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
-      downloadUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80',
     },
   ],
-  lifestyle: [
+  'estilo de vida': [
     {
-      id: 'lifestyle-1',
       url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
-      alt: 'Healthy lifestyle',
+      alt: 'Estilo de vida saludable',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
-      downloadUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
     },
     {
-      id: 'lifestyle-2',
       url: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&q=80',
-      alt: 'Work-life balance',
+      alt: 'Equilibrio vida-trabajo',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
-      downloadUrl: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&q=80',
     },
     {
-      id: 'lifestyle-3',
       url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80',
-      alt: 'Personal development',
+      alt: 'Desarrollo personal',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
-      downloadUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80',
     },
   ],
-  health: [
+  salud: [
     {
-      id: 'health-1',
       url: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=80',
-      alt: 'Health and wellness',
+      alt: 'Salud y bienestar',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
-      downloadUrl: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=80',
     },
     {
-      id: 'health-2',
       url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80',
-      alt: 'Mental health',
+      alt: 'Salud mental',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
-      downloadUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80',
     },
     {
-      id: 'health-3',
       url: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80',
-      alt: 'Fitness and exercise',
+      alt: 'Fitness y ejercicio',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
-      downloadUrl: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80',
     },
   ],
-  travel: [
+  viajes: [
     {
-      id: 'travel-1',
       url: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80',
-      alt: 'Travel and adventure',
+      alt: 'Viajes y aventura',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
-      downloadUrl: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80',
     },
     {
-      id: 'travel-2',
       url: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80',
-      alt: 'Beautiful destinations',
+      alt: 'Destinos hermosos',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
-      downloadUrl: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80',
     },
     {
-      id: 'travel-3',
       url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
-      alt: 'Tropical paradise',
+      alt: 'Paraíso tropical',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
-      downloadUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
     },
   ],
   default: [
     {
-      id: 'default-1',
       url: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&q=80',
-      alt: 'Modern workspace',
+      alt: 'Espacio de trabajo moderno',
       photographer: 'Glenn Carstens-Peters',
       photographerUrl: 'https://unsplash.com/@glenncarstenspeters',
-      downloadUrl: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&q=80',
     },
     {
-      id: 'default-2',
       url: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80',
-      alt: 'Creative workspace',
+      alt: 'Espacio de trabajo creativo',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
-      downloadUrl: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80',
     },
     {
-      id: 'default-3',
       url: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80',
-      alt: 'Team collaboration',
+      alt: 'Colaboración en equipo',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
-      downloadUrl: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80',
     },
   ],
 }
 
 export async function getImageForTopic(topic: string): Promise<UnsplashImage> {
+  console.log('🖼️ Unsplash: Seleccionando imagen para tema:', topic)
+  
   try {
-    // Normalize topic to lowercase for matching
+    // Normalizar tema a minúsculas para coincidencia
     const normalizedTopic = topic.toLowerCase()
     
-    // Find matching category
+    // Buscar categoría coincidente
     let categoryImages = topicImages.default
     
     for (const [category, images] of Object.entries(topicImages)) {
       if (normalizedTopic.includes(category) || topic.toLowerCase().includes(category)) {
         categoryImages = images
+        console.log(`✅ Unsplash: Categoría encontrada: ${category}`)
         break
       }
     }
     
-    // Select random image from category
+    // Seleccionar imagen aleatoria de la categoría
     const randomIndex = Math.floor(Math.random() * categoryImages.length)
-    return categoryImages[randomIndex]
+    const selectedImage = categoryImages[randomIndex]
+    
+    console.log('✅ Unsplash: Imagen seleccionada correctamente')
+    return selectedImage
     
   } catch (error) {
-    console.error('Error selecting image:', error)
+    console.error('❌ Unsplash: Error seleccionando imagen:', error)
     
-    // Fallback to first default image
+    // Respaldo a primera imagen por defecto
     return topicImages.default[0]
   }
 }

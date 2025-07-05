@@ -36,6 +36,7 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-300"
           sizes={featured ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 100vw, 33vw'}
+          priority={featured}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         
@@ -50,7 +51,7 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
         {featured && (
           <div className="absolute top-4 right-4">
             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-pink-500 to-purple-500 text-white">
-              Featured
+              Destacado
             </span>
           </div>
         )}
@@ -90,7 +91,7 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
               <span>{formatRelativeTime(publishDate)}</span>
             </div>
             <div className="flex items-center space-x-1">
-              <span>{estimatedReadTime} min read</span>
+              <span>{estimatedReadTime} min lectura</span>
             </div>
           </div>
           

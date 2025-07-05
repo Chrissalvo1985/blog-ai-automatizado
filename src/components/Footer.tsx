@@ -5,22 +5,22 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   const footerLinks = {
-    Company: [
-      { name: 'About', href: '/about' },
-      { name: 'Contact', href: '/contact' },
-      { name: 'Privacy Policy', href: '/privacy' },
-      { name: 'Terms of Service', href: '/terms' },
+    Empresa: [
+      { name: 'Acerca de', href: '/about' },
+      { name: 'Contacto', href: '/contact' },
+      { name: 'Política de Privacidad', href: '/privacy' },
+      { name: 'Términos de Servicio', href: '/terms' },
     ],
-    Categories: [
-      { name: 'Technology', href: '/categories/technology' },
-      { name: 'Lifestyle', href: '/categories/lifestyle' },
-      { name: 'Business', href: '/categories/business' },
-      { name: 'Health', href: '/categories/health' },
+    Categorías: [
+      { name: 'Tecnología', href: '/categories/technology' },
+      { name: 'Estilo de Vida', href: '/categories/lifestyle' },
+      { name: 'Negocios', href: '/categories/business' },
+      { name: 'Salud', href: '/categories/health' },
     ],
-    Resources: [
+    Recursos: [
       { name: 'Blog', href: '/' },
       { name: 'RSS Feed', href: '/feed.xml' },
-      { name: 'Sitemap', href: '/sitemap.xml' },
+      { name: 'Mapa del Sitio', href: '/sitemap.xml' },
       { name: 'Admin', href: '/admin' },
     ],
   }
@@ -37,12 +37,12 @@ export default function Footer() {
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full animate-pulse" />
               </div>
               <span className="text-xl font-bold group-hover:text-blue-400 transition-colors">
-                AutoBlog
+                Blog IA
               </span>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed">
-              AI-powered automated blog delivering fresh, engaging content daily. 
-              Discover trending topics and expert insights.
+              Blog automatizado con inteligencia artificial que entrega contenido fresco y atractivo diariamente. 
+              Descubre temas de tendencia e insights expertos.
             </p>
           </div>
 
@@ -72,11 +72,11 @@ export default function Footer() {
         <div className="mt-12 pt-8 border-t border-gray-800">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
-              © {currentYear} AutoBlog. All rights reserved.
+              © {currentYear} Blog IA. Todos los derechos reservados.
             </p>
             <div className="flex items-center space-x-4 mt-4 md:mt-0">
               <span className="text-gray-400 text-sm">
-                Powered by AI
+                Powered by IA
               </span>
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
             </div>

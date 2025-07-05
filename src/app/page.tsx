@@ -32,29 +32,29 @@ export default async function HomePage() {
               </div>
               
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-                AI-Powered
+                Blog con
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                  AutoBlog
+                  Inteligencia Artificial
                 </span>
               </h1>
               
               <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-                Discover fresh, engaging content generated daily by artificial intelligence. 
-                Stay updated with trending topics, expert insights, and thought-provoking articles.
+                Descubre contenido fresco y atractivo generado diariamente por inteligencia artificial. 
+                Mantente actualizado con temas de tendencia, insights expertos y artículos que invitan a la reflexión.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <div className="flex items-center space-x-2 text-sm text-gray-500">
                   <RocketLaunchIcon className="h-5 w-5 text-blue-600" />
-                  <span>Automated Content Generation</span>
+                  <span>Generación Automática de Contenido</span>
                 </div>
                 <div className="flex items-center space-x-2 text-sm text-gray-500">
                   <ClockIcon className="h-5 w-5 text-green-600" />
-                  <span>Updated Daily</span>
+                  <span>Actualizado Diariamente</span>
                 </div>
                 <div className="flex items-center space-x-2 text-sm text-gray-500">
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                  <span>AI-Powered</span>
+                  <span>Powered by IA</span>
                 </div>
               </div>
             </div>
@@ -66,9 +66,9 @@ export default async function HomePage() {
           <section className="py-16 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Articles</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">Artículos Destacados</h2>
                 <p className="text-lg text-gray-600">
-                  Handpicked stories that are trending right now
+                  Historias seleccionadas que están en tendencia ahora
                 </p>
               </div>
               
@@ -85,9 +85,9 @@ export default async function HomePage() {
         <section className="py-16 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Latest Articles</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Últimos Artículos</h2>
               <p className="text-lg text-gray-600">
-                Fresh content delivered by our AI writing assistant
+                Contenido fresco entregado por nuestro asistente de escritura con IA
               </p>
             </div>
             
@@ -101,14 +101,11 @@ export default async function HomePage() {
               <div className="text-center py-12">
                 <SparklesIcon className="h-16 w-16 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  No posts yet
+                  Próximamente
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  The AI is preparing amazing content for you. Check back soon!
+                  Contenido fresco generado por IA será publicado diariamente. ¡Vuelve pronto para ver los últimos artículos!
                 </p>
-                <div className="flex justify-center">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" />
-                </div>
               </div>
             )}
           </div>
@@ -118,15 +115,15 @@ export default async function HomePage() {
         <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl font-bold text-white mb-4">
-              Never Miss an Update
+              Nunca Te Pierdas una Actualización
             </h2>
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Our AI creates fresh content every day. Stay in the loop with the latest insights and trends.
+              Nuestra IA crea contenido fresco todos los días. Mantente al día con los últimos insights y tendencias.
             </p>
             <div className="flex items-center justify-center space-x-4">
               <div className="flex items-center space-x-2 text-blue-100">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                <span>AI is currently generating new content</span>
+                <span>Nuevo contenido publicado diariamente</span>
               </div>
             </div>
           </div>

@@ -45,6 +45,8 @@ export default function AdminPage() {
   const [isGenerating, setIsGenerating] = useState(false)
   const [customTopic, setCustomTopic] = useState('')
   const [loading, setLoading] = useState(true)
+  const [debugInfo, setDebugInfo] = useState<any>(null)
+  const [showDebug, setShowDebug] = useState(false)
 
   useEffect(() => {
     fetchData()
@@ -70,6 +72,18 @@ export default function AdminPage() {
       console.error('Error fetching data:', error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const fetchDebugInfo = async () => {
+    try {
+      const response = await fetch('/api/debug')
+      if (response.ok) {
+        const data = await response.json()
+        setDebugInfo(data)
+      }
+    } catch (error) {
+      console.error('Error fetching debug info:', error)
     }
   }
 
@@ -124,7 +138,7 @@ export default function AdminPage() {
   }
 
   const deletePost = async (postId: string) => {
-    if (!confirm('Are you sure you want to delete this post?')) return
+    if (!confirm('¿Estás seguro de que quieres eliminar este artículo?')) return
 
     try {
       const response = await fetch(`/api/posts/${postId}`, {
@@ -138,6 +152,8 @@ export default function AdminPage() {
       console.error('Error deleting post:', error)
     }
   }
+
+
 
   if (loading) {
     return (
@@ -159,24 +175,79 @@ export default function AdminPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Dashboard</h1>
-            <p className="text-gray-600">Manage your AI-generated blog content</p>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Panel de Administración</h1>
+            <p className="text-gray-600">Gestiona el contenido de tu blog generado por IA</p>
+          </div>
+
+          {/* Debug Section */}
+          <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold text-gray-900">Información de Debug</h2>
+              <button
+                onClick={() => {
+                  setShowDebug(!showDebug)
+                  if (!showDebug && !debugInfo) {
+                    fetchDebugInfo()
+                  }
+                }}
+                className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md"
+              >
+                {showDebug ? 'Ocultar' : 'Mostrar'}
+              </button>
+            </div>
+            
+            {showDebug && (
+              <div className="space-y-4">
+                {debugInfo ? (
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <pre className="text-sm text-gray-800 overflow-x-auto">
+                      {JSON.stringify(debugInfo, null, 2)}
+                    </pre>
+                  </div>
+                ) : (
+                  <div className="text-gray-500">Cargando información de debug...</div>
+                )}
+                
+                <div className="flex space-x-2">
+                  <button
+                    onClick={fetchDebugInfo}
+                    className="px-3 py-1 text-sm bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-md"
+                  >
+                    Actualizar
+                  </button>
+                  <button
+                    onClick={async () => {
+                      try {
+                        const response = await fetch('/api/test')
+                        const data = await response.json()
+                        alert(`Test API: ${data.message}`)
+                      } catch (error) {
+                        alert('Error en test API')
+                      }
+                    }}
+                    className="px-3 py-1 text-sm bg-green-100 hover:bg-green-200 text-green-700 rounded-md"
+                  >
+                    Test API
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Generation Controls */}
           <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Generate New Content</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Generar Nuevo Contenido</h2>
             
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Custom Topic (optional)
+                  Tema Personalizado (opcional)
                 </label>
                 <input
                   type="text"
                   value={customTopic}
                   onChange={(e) => setCustomTopic(e.target.value)}
-                  placeholder="Enter a topic or leave blank for random"
+                  placeholder="Ingresa un tema o déjalo en blanco para uno aleatorio"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
@@ -192,7 +263,7 @@ export default function AdminPage() {
                   ) : (
                     <SparklesIcon className="h-4 w-4 mr-2" />
                   )}
-                  {isGenerating ? 'Generating...' : 'Generate Post'}
+                  {isGenerating ? 'Generando...' : 'Generar Artículo'}
                 </button>
                 
                 <button
@@ -201,7 +272,7 @@ export default function AdminPage() {
                   className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <PlusIcon className="h-4 w-4 mr-2" />
-                  Random Topic
+                  Tema Aleatorio
                 </button>
               </div>
             </div>
@@ -210,7 +281,7 @@ export default function AdminPage() {
           {/* Posts Management */}
           <div className="bg-white rounded-lg shadow-sm mb-8">
             <div className="px-6 py-4 border-b border-gray-200">
-              <h2 className="text-xl font-semibold text-gray-900">Posts ({posts.length})</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Artículos ({posts.length})</h2>
             </div>
             
             <div className="overflow-x-auto">
@@ -218,22 +289,22 @@ export default function AdminPage() {
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Title
+                      Título
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Category
+                      Categoría
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Status
+                      Estado
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Views
+                      Vistas
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Created
+                      Creado
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Actions
+                      Acciones
                     </th>
                   </tr>
                 </thead>
@@ -256,7 +327,7 @@ export default function AdminPage() {
                             ? 'bg-green-100 text-green-800' 
                             : 'bg-yellow-100 text-yellow-800'
                         }`}>
-                          {post.published ? 'Published' : 'Draft'}
+                          {post.published ? 'Publicado' : 'Borrador'}
                         </span>
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-900">
@@ -301,7 +372,7 @@ export default function AdminPage() {
           {/* Generation Logs */}
           <div className="bg-white rounded-lg shadow-sm">
             <div className="px-6 py-4 border-b border-gray-200">
-              <h2 className="text-xl font-semibold text-gray-900">Generation Logs</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Registros de Generación</h2>
             </div>
             
             <div className="overflow-x-auto">
@@ -309,16 +380,16 @@ export default function AdminPage() {
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Topic
+                      Tema
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Status
+                      Estado
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Generated Post
+                      Artículo Generado
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Created
+                      Creado
                     </th>
                   </tr>
                 </thead>
@@ -341,7 +412,9 @@ export default function AdminPage() {
                           {log.status === 'completed' && <CheckCircleIcon className="h-3 w-3 mr-1" />}
                           {log.status === 'failed' && <XCircleIcon className="h-3 w-3 mr-1" />}
                           {log.status === 'generating' && <ClockIcon className="h-3 w-3 mr-1" />}
-                          {log.status}
+                          {log.status === 'completed' ? 'Completado' : 
+                           log.status === 'failed' ? 'Falló' :
+                           log.status === 'generating' ? 'Generando' : log.status}
                         </span>
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-900">

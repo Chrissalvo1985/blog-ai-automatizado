@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) {
     return {
-      title: 'Post Not Found',
+      title: 'Artículo No Encontrado',
     }
   }
 
@@ -101,11 +101,11 @@ export default async function PostPage({ params }: Props) {
               </div>
               <div className="flex items-center space-x-2">
                 <ClockIcon className="h-4 w-4" />
-                <span>{estimatedReadTime} min read</span>
+                <span>{estimatedReadTime} min lectura</span>
               </div>
               <div className="flex items-center space-x-2">
                 <EyeIcon className="h-4 w-4" />
-                <span>{post.views.toLocaleString()} views</span>
+                <span>{post.views.toLocaleString()} vistas</span>
               </div>
               <div className="flex items-center space-x-2">
                 <HeartIcon className="h-4 w-4" />
@@ -160,7 +160,7 @@ export default async function PostPage({ params }: Props) {
           <section className="bg-gray-50 py-16">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-8">
-                Related Articles
+                Artículos Relacionados
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {relatedPosts.map((relatedPost) => (
