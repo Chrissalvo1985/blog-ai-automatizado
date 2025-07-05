@@ -49,6 +49,9 @@ SITE_URL=https://tu-dominio.vercel.app
 
 # Secreto para cron jobs
 CRON_SECRET=tu-secreto-aleatorio-aqui
+
+# Contraseña de administrador (cambiar por una segura)
+NEXT_PUBLIC_ADMIN_PASSWORD=tu_contraseña_segura_aqui
 ```
 
 ### 3. Despliegue en Vercel
@@ -78,10 +81,13 @@ CRON_SECRET=tu-secreto-aleatorio-aqui
 - **SEO optimizado** por defecto
 
 ### Panel de Administración
-- Accede a `/admin` para gestionar contenido
+- Accede a `/admin` para gestionar contenido (protegido con contraseña)
+- **Contraseña por defecto**: `BlogIA2024!`
 - Generar posts manualmente
 - Ver logs de generación
 - Configurar ajustes
+
+**⚠️ Importante**: Cambia la contraseña de admin agregando `NEXT_PUBLIC_ADMIN_PASSWORD=tu_contraseña_segura` a tus variables de entorno.
 
 ### PWA
 - **Instalable** en dispositivos móviles

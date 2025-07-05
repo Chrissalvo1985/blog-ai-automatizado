@@ -1,3 +1,5 @@
+import { db } from './db'
+
 export interface UnsplashImage {
   url: string
   alt: string
@@ -26,6 +28,18 @@ const topicImages: Record<string, UnsplashImage[]> = {
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
     },
+    {
+      url: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80',
+      alt: 'Código y desarrollo web',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80',
+      alt: 'Dispositivos y tecnología',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
   ],
   negocios: [
     {
@@ -43,6 +57,18 @@ const topicImages: Record<string, UnsplashImage[]> = {
     {
       url: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80',
       alt: 'Estrategia empresarial',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=80',
+      alt: 'Reunión de negocios',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1553484771-371a605b060b?w=800&q=80',
+      alt: 'Oficina moderna',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
     },
@@ -66,6 +92,18 @@ const topicImages: Record<string, UnsplashImage[]> = {
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
     },
+    {
+      url: 'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=800&q=80',
+      alt: 'Vida cotidiana',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1494790108755-2616c13d1e26?w=800&q=80',
+      alt: 'Momento de reflexión',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
   ],
   salud: [
     {
@@ -83,6 +121,18 @@ const topicImages: Record<string, UnsplashImage[]> = {
     {
       url: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80',
       alt: 'Fitness y ejercicio',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80',
+      alt: 'Alimentación saludable',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1506629905607-c60caf9a8b7d?w=800&q=80',
+      alt: 'Meditación y relajación',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
     },
@@ -106,6 +156,18 @@ const topicImages: Record<string, UnsplashImage[]> = {
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
     },
+    {
+      url: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80',
+      alt: 'Paisaje montañoso',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=800&q=80',
+      alt: 'Aventura urbana',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
   ],
   default: [
     {
@@ -123,6 +185,18 @@ const topicImages: Record<string, UnsplashImage[]> = {
     {
       url: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80',
       alt: 'Colaboración en equipo',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80',
+      alt: 'Creatividad e innovación',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80',
+      alt: 'Planificación y estrategia',
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
     },
@@ -147,9 +221,76 @@ export async function getImageForTopic(topic: string): Promise<UnsplashImage> {
       }
     }
     
-    // Seleccionar imagen aleatoria de la categoría
-    const randomIndex = Math.floor(Math.random() * categoryImages.length)
-    const selectedImage = categoryImages[randomIndex]
+    // Obtener URLs de imágenes ya usadas en los últimos 30 días
+    const thirtyDaysAgo = new Date()
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
+    
+    const usedImages = await db.post.findMany({
+      where: {
+        createdAt: {
+          gte: thirtyDaysAgo
+        }
+      },
+      select: {
+        imageUrl: true
+      }
+    })
+    
+    const usedImageUrls = new Set(usedImages.map(post => post.imageUrl))
+    console.log(`🔍 Unsplash: ${usedImageUrls.size} imágenes ya usadas en los últimos 30 días`)
+    
+    // Filtrar imágenes disponibles (no usadas)
+    const availableImages = categoryImages.filter(img => !usedImageUrls.has(img.url))
+    
+    let selectedImage: UnsplashImage
+    
+    if (availableImages.length > 0) {
+      // Seleccionar imagen aleatoria de las disponibles
+      const randomIndex = Math.floor(Math.random() * availableImages.length)
+      selectedImage = availableImages[randomIndex]
+      console.log(`✅ Unsplash: Imagen única seleccionada de ${availableImages.length} disponibles`)
+    } else {
+      // Si todas las imágenes de la categoría están usadas, usar de otra categoría
+      console.log(`⚠️ Unsplash: Todas las imágenes de la categoría están usadas, buscando en otras categorías`)
+      
+      // Buscar en todas las categorías
+      const allAvailableImages: UnsplashImage[] = []
+      for (const [, images] of Object.entries(topicImages)) {
+        const categoryAvailable = images.filter(img => !usedImageUrls.has(img.url))
+        allAvailableImages.push(...categoryAvailable)
+      }
+      
+      if (allAvailableImages.length > 0) {
+        const randomIndex = Math.floor(Math.random() * allAvailableImages.length)
+        selectedImage = allAvailableImages[randomIndex]
+        console.log(`✅ Unsplash: Imagen única seleccionada de ${allAvailableImages.length} disponibles globalmente`)
+      } else {
+        // Si todas las imágenes están usadas, seleccionar la menos reciente
+        console.log(`⚠️ Unsplash: Todas las imágenes están usadas, seleccionando la menos reciente`)
+        
+        const oldestImagePost = await db.post.findFirst({
+          where: {
+            imageUrl: {
+              in: categoryImages.map(img => img.url)
+            }
+          },
+          orderBy: {
+            createdAt: 'asc'
+          },
+          select: {
+            imageUrl: true
+          }
+        })
+        
+        if (oldestImagePost) {
+          selectedImage = categoryImages.find(img => img.url === oldestImagePost.imageUrl) || categoryImages[0]
+          console.log(`✅ Unsplash: Reutilizando imagen más antigua`)
+        } else {
+          selectedImage = categoryImages[0]
+          console.log(`✅ Unsplash: Usando imagen por defecto`)
+        }
+      }
+    }
     
     console.log('✅ Unsplash: Imagen seleccionada correctamente')
     return selectedImage
