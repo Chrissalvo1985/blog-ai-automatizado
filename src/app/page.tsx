@@ -1,103 +1,139 @@
-import Image from "next/image";
+import { db } from '@/lib/db'
+import BlogCard from '@/components/BlogCard'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import { SparklesIcon, RocketLaunchIcon, ClockIcon } from '@heroicons/react/24/solid'
 
-export default function Home() {
+export default async function HomePage() {
+  // Fetch published posts
+  const posts = await db.post.findMany({
+    where: { published: true },
+    orderBy: { publishedAt: 'desc' },
+    take: 12,
+  })
+
+  const featuredPosts = posts.filter(post => post.featured).slice(0, 2)
+  const regularPosts = posts.filter(post => !post.featured).slice(0, 6)
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      <Header />
+      
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="relative bg-gradient-to-br from-blue-50 via-white to-purple-50 py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <div className="flex justify-center mb-6">
+                <div className="relative">
+                  <SparklesIcon className="h-16 w-16 text-blue-600" />
+                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full animate-pulse" />
+                </div>
+              </div>
+              
+              <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+                AI-Powered
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                  AutoBlog
+                </span>
+              </h1>
+              
+              <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+                Discover fresh, engaging content generated daily by artificial intelligence. 
+                Stay updated with trending topics, expert insights, and thought-provoking articles.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <div className="flex items-center space-x-2 text-sm text-gray-500">
+                  <RocketLaunchIcon className="h-5 w-5 text-blue-600" />
+                  <span>Automated Content Generation</span>
+                </div>
+                <div className="flex items-center space-x-2 text-sm text-gray-500">
+                  <ClockIcon className="h-5 w-5 text-green-600" />
+                  <span>Updated Daily</span>
+                </div>
+                <div className="flex items-center space-x-2 text-sm text-gray-500">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                  <span>AI-Powered</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+        {/* Featured Posts */}
+        {featuredPosts.length > 0 && (
+          <section className="py-16 bg-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Articles</h2>
+                <p className="text-lg text-gray-600">
+                  Handpicked stories that are trending right now
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {featuredPosts.map((post) => (
+                  <BlogCard key={post.id} post={post} featured />
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Recent Posts */}
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Latest Articles</h2>
+              <p className="text-lg text-gray-600">
+                Fresh content delivered by our AI writing assistant
+              </p>
+            </div>
+            
+            {regularPosts.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {regularPosts.map((post) => (
+                  <BlogCard key={post.id} post={post} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <SparklesIcon className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  No posts yet
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  The AI is preparing amazing content for you. Check back soon!
+                </p>
+                <div className="flex justify-center">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" />
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Never Miss an Update
+            </h2>
+            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+              Our AI creates fresh content every day. Stay in the loop with the latest insights and trends.
+            </p>
+            <div className="flex items-center justify-center space-x-4">
+              <div className="flex items-center space-x-2 text-blue-100">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                <span>AI is currently generating new content</span>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+
+      <Footer />
+    </>
+  )
 }

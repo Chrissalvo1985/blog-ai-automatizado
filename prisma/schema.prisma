@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Post {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  summary     String
+  content     String
+  imageUrl    String
+  imageAlt    String
+  tags        String   // JSON string of tags array
+  category    String
+  published   Boolean  @default(false)
+  featured    Boolean  @default(false)
+  views       Int      @default(0)
+  likes       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  publishedAt DateTime?
+  
+  generationLogs GenerationLog[]
+  
+  @@map("posts")
+}
+
+model GenerationLog {
+  id        String   @id @default(cuid())
+  postId    String?
+  topic     String
+  status    String   // "pending", "generating", "completed", "failed"
+  error     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  post Post? @relation(fields: [postId], references: [id])
+  
+  @@map("generation_logs")
+}
+
+model SiteSettings {
+  id          String @id @default(cuid())
+  key         String @unique
+  value       String
+  description String?
+  
+  @@map("site_settings")
+}
