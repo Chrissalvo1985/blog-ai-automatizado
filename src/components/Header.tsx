@@ -25,7 +25,7 @@ export default function Header() {
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full animate-pulse" />
             </div>
             <span className="text-xl font-bold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-              Nexus
+              Blog de Chris
             </span>
           </Link>
 
