@@ -1,6 +1,5 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import { UserCircleIcon, CpuChipIcon } from '@heroicons/react/24/solid'
 
 export const metadata = {
   title: 'Sobre mí',
@@ -49,7 +48,7 @@ export default function AboutPage() {
             ))}
           </div>
           <blockquote className="italic text-indigo-600 dark:text-indigo-300 text-center mt-4 border-l-4 border-indigo-400 pl-4">
-            "Creo en el poder de la humildad, la curiosidad y la colaboración para transformar el mundo, un proyecto a la vez."
+            &quot;Creo en el poder de la humildad, la curiosidad y la colaboración para transformar el mundo, un proyecto a la vez.&quot;
           </blockquote>
           <div className="mt-6 space-y-3 text-base text-gray-600 dark:text-gray-400 text-center">
             <p>
