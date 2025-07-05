@@ -64,7 +64,6 @@ export default async function HomePage() {
                 <p className="text-xl lg:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto">
                   Bienvenido a mi <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-indigo-700 font-semibold">universo digital</span>, 
                   donde comparto descubrimientos, reflexiones y aventuras en el mundo de la tecnología e innovación.
-                  <span className="block mt-2">Aquí va el texto adicional solicitado.</span>
                 </p>
               </div>
               
