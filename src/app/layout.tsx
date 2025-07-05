@@ -6,14 +6,14 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "AutoBlog - AI-Powered Blog",
-    template: "%s | AutoBlog",
+    default: "Blog de Chris",
+    template: "%s | Blog de Chris",
   },
-  description: "AI-Powered Automated Blog with fresh content daily. Discover trending topics, insights, and expert perspectives.",
+  description: "Blog personal de Chris Salvo: tecnología, innovación y exploración digital.",
   keywords: ["blog", "AI", "automation", "content", "technology", "insights"],
-  authors: [{ name: "AutoBlog" }],
-  creator: "AutoBlog",
-  publisher: "AutoBlog",
+  authors: [{ name: "Chris Salvo" }],
+  creator: "Chris Salvo",
+  publisher: "Chris Salvo",
   formatDetection: {
     email: false,
     address: false,
@@ -24,18 +24,18 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "AutoBlog - AI-Powered Blog",
-    description: "AI-Powered Automated Blog with fresh content daily",
+    title: "Blog de Chris",
+    description: "Blog personal de Chris Salvo: tecnología, innovación y exploración digital.",
     url: "/",
-    siteName: "AutoBlog",
+    siteName: "Blog de Chris",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AutoBlog - AI-Powered Blog",
-    description: "AI-Powered Automated Blog with fresh content daily",
-    creator: "@autoblog",
+    title: "Blog de Chris",
+    description: "Blog personal de Chris Salvo: tecnología, innovación y exploración digital.",
+    creator: "@chrissalvo1985",
   },
   robots: {
     index: true,

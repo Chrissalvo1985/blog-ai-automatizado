@@ -2,8 +2,8 @@ import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'AutoBlog - AI-Powered Blog',
-    short_name: 'AutoBlog',
+    name: 'Blog de Chris',
+    short_name: 'Blog de Chris',
     description: 'AI-Powered Automated Blog with fresh content daily',
     start_url: '/',
     display: 'standalone',
