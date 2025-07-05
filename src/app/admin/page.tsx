@@ -52,10 +52,10 @@ export default function AdminPage() {
   const [password, setPassword] = useState('')
   const [authError, setAuthError] = useState('')
   const [postsPage, setPostsPage] = useState(1)
-  const [postsPageSize] = useState(20)
+  const [postsPageSize] = useState(5)
   const [postsTotal, setPostsTotal] = useState(0)
   const [logsPage, setLogsPage] = useState(1)
-  const [logsPageSize] = useState(20)
+  const [logsPageSize] = useState(5)
   const [logsTotal, setLogsTotal] = useState(0)
 
   useEffect(() => {
