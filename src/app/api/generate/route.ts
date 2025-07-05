@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { generateBlogPost } from '@/lib/openai'
 import { getImageForTopic } from '@/lib/unsplash'
-import { createSlug, generateRandomTopics } from '@/lib/utils'
+import { createSlug } from '@/lib/utils'
 
 export async function POST(request: NextRequest) {
   try {

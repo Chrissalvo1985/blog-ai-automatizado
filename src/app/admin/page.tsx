@@ -45,7 +45,7 @@ export default function AdminPage() {
   const [isGenerating, setIsGenerating] = useState(false)
   const [customTopic, setCustomTopic] = useState('')
   const [loading, setLoading] = useState(true)
-  const [debugInfo, setDebugInfo] = useState<any>(null)
+  const [debugInfo, setDebugInfo] = useState<Record<string, unknown> | null>(null)
   const [showDebug, setShowDebug] = useState(false)
 
   useEffect(() => {
@@ -221,7 +221,7 @@ export default function AdminPage() {
                         const response = await fetch('/api/test')
                         const data = await response.json()
                         alert(`Test API: ${data.message}`)
-                      } catch (error) {
+                      } catch {
                         alert('Error en test API')
                       }
                     }}
