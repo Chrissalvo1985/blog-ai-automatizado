@@ -61,7 +61,7 @@ export async function generateBlogPost(topic: string, context?: string, customCo
   - Incluye datos específicos y estadísticas cuando sea posible
   - Usa metáforas y analogías para explicar conceptos complejos
   - Incluye al menos 3 subtemas específicos relacionados
-  - Integra tendencias actuales (2024) con fuentes implícitas
+  - Integra tendencias actuales (2025) con fuentes implícitas
   - Perspectiva global con relevancia para el mercado hispano
   - Longitud: 1000-1500 palabras
   - Formato markdown con estructura clara (encabezados, listas, énfasis)
@@ -71,7 +71,7 @@ export async function generateBlogPost(topic: string, context?: string, customCo
   - Incluye perspectivas analíticas y datos concretos
   - Conecta conceptos de manera lógica y fundamentada
   - Usa terminología técnica apropiada pero explicada
-  - Incluye predicciones basadas en tendencias actuales
+  - Incluye predicciones basadas en tendencias actuales de 2025
   - Proporciona valor educativo real y actionable
 
   ESTRUCTURA FINAL:
@@ -178,7 +178,7 @@ export async function generateBlogPost(topic: string, context?: string, customCo
 }
 
 export async function generateTopicIdeas(count: number = 5): Promise<string[]> {
-  const prompt = `Genera ${count} ideas de temas innovadores para artículos de blog que sean tendencia en 2024.
+  const prompt = `Genera ${count} ideas de temas innovadores para artículos de blog que sean tendencia en 2025.
   
   ENFOQUE OBLIGATORIO - Todos los temas deben estar relacionados con:
   🚀 Tecnología emergente (IA, blockchain, IoT, realidad aumentada, etc.)
@@ -188,10 +188,10 @@ export async function generateTopicIdeas(count: number = 5): Promise<string[]> {
   🏢 Negocios digitales y emprendimiento tech
   
   CRITERIOS ESPECÍFICOS:
-  - Actuales y relevantes para 2024
+  - Actuales y relevantes para 2025
   - Angulo único o perspectiva contraintuitiva
   - Potencial viral para audiencia tech-savvy
-  - Incluye tendencias emergentes
+  - Incluye tendencias emergentes de 2025
   - Enfoque en el mercado hispanohablante
   - Combina múltiples disciplinas
   - Potencial para generar debate constructivo
