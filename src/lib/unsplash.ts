@@ -40,6 +40,138 @@ const topicImages: Record<string, UnsplashImage[]> = {
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
     },
+    {
+      url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80',
+      alt: 'Inteligencia artificial y robots',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1574169208507-84376144848b?w=800&q=80',
+      alt: 'Blockchain y criptomonedas',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1529465230221-a0d17d0fdb1d?w=800&q=80',
+      alt: 'Realidad virtual y aumentada',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+  ],
+  innovacion: [
+    {
+      url: 'https://images.unsplash.com/photo-1563770660941-20978e870e26?w=800&q=80',
+      alt: 'Innovación y creatividad',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=800&q=80',
+      alt: 'Bombilla e ideas innovadoras',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&q=80',
+      alt: 'Transformación digital',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&q=80',
+      alt: 'Innovación tecnológica',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80',
+      alt: 'Futuro y innovación',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80',
+      alt: 'Espacio y tecnología futurista',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+  ],
+  creatividad: [
+    {
+      url: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&q=80',
+      alt: 'Arte y creatividad digital',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=800&q=80',
+      alt: 'Diseño y creatividad',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&q=80',
+      alt: 'Creatividad e innovación',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=800&q=80',
+      alt: 'Arte digital y tecnología',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
+      alt: 'Proceso creativo',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+      alt: 'Infografías y análisis creativos',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+  ],
+  educacion: [
+    {
+      url: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80',
+      alt: 'Educación digital y tecnología',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&q=80',
+      alt: 'Aprendizaje y tecnología',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80',
+      alt: 'Educación colaborativa',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80',
+      alt: 'Educación del futuro',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
+      alt: 'Aprendizaje continuo',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1545987796-200677ee1011?w=800&q=80',
+      alt: 'Educación online y digital',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
   ],
   negocios: [
     {
@@ -72,7 +204,20 @@ const topicImages: Record<string, UnsplashImage[]> = {
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
     },
+    {
+      url: 'https://images.unsplash.com/photo-1542744094-3a31f272c490?w=800&q=80',
+      alt: 'Emprendimiento digital',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+      alt: 'Análisis y estrategia',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
   ],
+  // Mantengo las categorías existentes para compatibilidad
   'estilo de vida': [
     {
       url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
@@ -200,6 +345,12 @@ const topicImages: Record<string, UnsplashImage[]> = {
       photographer: 'Unsplash',
       photographerUrl: 'https://unsplash.com',
     },
+    {
+      url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80',
+      alt: 'Tecnología del futuro',
+      photographer: 'Unsplash',
+      photographerUrl: 'https://unsplash.com',
+    },
   ],
 }
 
@@ -210,14 +361,36 @@ export async function getImageForTopic(topic: string): Promise<UnsplashImage> {
     // Normalizar tema a minúsculas para coincidencia
     const normalizedTopic = topic.toLowerCase()
     
-    // Buscar categoría coincidente
+    // Buscar categoría coincidente con prioridad para nuevos temas
     let categoryImages = topicImages.default
+    let foundCategory = 'default'
     
-    for (const [category, images] of Object.entries(topicImages)) {
-      if (normalizedTopic.includes(category) || topic.toLowerCase().includes(category)) {
-        categoryImages = images
-        console.log(`✅ Unsplash: Categoría encontrada: ${category}`)
+    // Priorizar las nuevas categorías enfocadas en el tema
+    const priorityCategories = ['tecnologia', 'innovacion', 'creatividad', 'educacion', 'negocios']
+    
+    for (const category of priorityCategories) {
+      if (normalizedTopic.includes(category) || 
+          normalizedTopic.includes(category.replace('ó', 'o')) || // tecnología -> tecnologia
+          normalizedTopic.includes(category.replace('ó', 'o').replace('ñ', 'n'))) { // educación -> educacion
+        categoryImages = topicImages[category]
+        foundCategory = category
+        console.log(`✅ Unsplash: Categoría prioritaria encontrada: ${category}`)
         break
+      }
+    }
+    
+    // Si no encontró categoría prioritaria, buscar en todas las categorías
+    if (foundCategory === 'default') {
+      for (const [category, images] of Object.entries(topicImages)) {
+        if (category !== 'default' && 
+            (normalizedTopic.includes(category) || 
+             normalizedTopic.includes(category.replace(' ', '')) ||
+             category.includes(normalizedTopic.split(' ')[0]))) {
+          categoryImages = images
+          foundCategory = category
+          console.log(`✅ Unsplash: Categoría encontrada: ${category}`)
+          break
+        }
       }
     }
     
@@ -248,63 +421,80 @@ export async function getImageForTopic(topic: string): Promise<UnsplashImage> {
       // Seleccionar imagen aleatoria de las disponibles
       const randomIndex = Math.floor(Math.random() * availableImages.length)
       selectedImage = availableImages[randomIndex]
-      console.log(`✅ Unsplash: Imagen única seleccionada de ${availableImages.length} disponibles`)
+      console.log(`✅ Unsplash: Imagen única seleccionada de ${availableImages.length} disponibles en categoría: ${foundCategory}`)
     } else {
-      // Si todas las imágenes de la categoría están usadas, usar de otra categoría
-      console.log(`⚠️ Unsplash: Todas las imágenes de la categoría están usadas, buscando en otras categorías`)
+      // Si todas las imágenes de la categoría están usadas, usar de las categorías prioritarias
+      console.log(`⚠️ Unsplash: Todas las imágenes de ${foundCategory} están usadas, buscando en categorías prioritarias`)
       
-      // Buscar en todas las categorías
-      const allAvailableImages: UnsplashImage[] = []
-      for (const [, images] of Object.entries(topicImages)) {
-        const categoryAvailable = images.filter(img => !usedImageUrls.has(img.url))
-        allAvailableImages.push(...categoryAvailable)
+      // Buscar en categorías prioritarias
+      const allPriorityImages: UnsplashImage[] = []
+      for (const category of priorityCategories) {
+        const categoryAvailable = topicImages[category]?.filter(img => !usedImageUrls.has(img.url)) || []
+        allPriorityImages.push(...categoryAvailable)
       }
       
-      if (allAvailableImages.length > 0) {
-        const randomIndex = Math.floor(Math.random() * allAvailableImages.length)
-        selectedImage = allAvailableImages[randomIndex]
-        console.log(`✅ Unsplash: Imagen única seleccionada de ${allAvailableImages.length} disponibles globalmente`)
+      if (allPriorityImages.length > 0) {
+        const randomIndex = Math.floor(Math.random() * allPriorityImages.length)
+        selectedImage = allPriorityImages[randomIndex]
+        console.log(`✅ Unsplash: Imagen única seleccionada de ${allPriorityImages.length} disponibles en categorías prioritarias`)
       } else {
-        // Si todas las imágenes están usadas, seleccionar la menos reciente
-        console.log(`⚠️ Unsplash: Todas las imágenes están usadas, seleccionando la menos reciente`)
+        // Si todas las imágenes prioritarias están usadas, usar cualquier imagen disponible
+        console.log(`⚠️ Unsplash: Todas las imágenes prioritarias están usadas, buscando en todas las categorías`)
         
-        const oldestImagePost = await db.post.findFirst({
-          where: {
-            imageUrl: {
-              in: categoryImages.map(img => img.url)
-            }
-          },
-          orderBy: {
-            createdAt: 'asc'
-          },
-          select: {
-            imageUrl: true
-          }
-        })
+        const allAvailableImages: UnsplashImage[] = []
+        for (const [, images] of Object.entries(topicImages)) {
+          const categoryAvailable = images.filter(img => !usedImageUrls.has(img.url))
+          allAvailableImages.push(...categoryAvailable)
+        }
         
-        if (oldestImagePost) {
-          selectedImage = categoryImages.find(img => img.url === oldestImagePost.imageUrl) || categoryImages[0]
-          console.log(`✅ Unsplash: Reutilizando imagen más antigua`)
+        if (allAvailableImages.length > 0) {
+          const randomIndex = Math.floor(Math.random() * allAvailableImages.length)
+          selectedImage = allAvailableImages[randomIndex]
+          console.log(`✅ Unsplash: Imagen única seleccionada de ${allAvailableImages.length} disponibles globalmente`)
         } else {
-          selectedImage = categoryImages[0]
-          console.log(`✅ Unsplash: Usando imagen por defecto`)
+          // Si todas las imágenes están usadas, seleccionar la menos reciente de la categoría
+          console.log(`⚠️ Unsplash: Todas las imágenes están usadas, seleccionando la menos reciente de ${foundCategory}`)
+          
+          const oldestImagePost = await db.post.findFirst({
+            where: {
+              imageUrl: {
+                in: categoryImages.map(img => img.url)
+              }
+            },
+            orderBy: {
+              createdAt: 'asc'
+            },
+            select: {
+              imageUrl: true
+            }
+          })
+          
+          if (oldestImagePost) {
+            selectedImage = categoryImages.find(img => img.url === oldestImagePost.imageUrl) || categoryImages[0]
+            console.log(`✅ Unsplash: Reutilizando imagen más antigua de ${foundCategory}`)
+          } else {
+            selectedImage = categoryImages[0]
+            console.log(`✅ Unsplash: Usando primera imagen de ${foundCategory}`)
+          }
         }
       }
     }
     
-    console.log('✅ Unsplash: Imagen seleccionada correctamente')
+    console.log('✅ Unsplash: Imagen seleccionada correctamente:', selectedImage.url)
     return selectedImage
     
   } catch (error) {
     console.error('❌ Unsplash: Error seleccionando imagen:', error)
     
-    // Respaldo a primera imagen por defecto
-    return topicImages.default[0]
+    // Respaldo garantizado a primera imagen por defecto
+    const backupImage = topicImages.default[0]
+    console.log('🔄 Unsplash: Usando imagen de respaldo:', backupImage.url)
+    return backupImage
   }
 }
 
 export async function getFeaturedImages(count: number = 6): Promise<UnsplashImage[]> {
-  const topics = ['technology', 'business', 'lifestyle', 'health', 'travel', 'default']
+  const topics = ['tecnologia', 'innovacion', 'creatividad', 'educacion', 'negocios', 'default']
   
   try {
     const images: UnsplashImage[] = []
