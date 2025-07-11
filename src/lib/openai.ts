@@ -17,12 +17,12 @@ export async function generateBlogPost(topic: string, context?: string, customCo
   if (context) console.log('📝 Context:', context)
   if (customContent) console.log('📝 CustomContent:', customContent)
 
-  let prompt = `Crea un artículo único e innovador sobre "${topic}".`
+  let prompt = `Crea un artículo profesional y educativo sobre "${topic}".`
   if (context) {
-    prompt += `\n\nTipo de contenido: ${context}. Adapta completamente el formato, estilo y estructura para crear una ${context} auténtica y original.`
+    prompt += `\n\nTipo de contenido: ${context}. Adapta el formato, estilo y estructura para crear una ${context} auténtica y original.`
   }
   if (customContent) {
-    prompt += `\n\nIntegra este contenido del autor de manera creativa y natural:\n"""${customContent}"""\nNo lo copies tal cual, transfórmalo y expándelo creativamente.`
+    prompt += `\n\nIntegra este contenido del autor de manera natural y profesional:\n"""${customContent}"""\nExpande y desarrolla estas ideas con análisis y contexto adicional.`
   }
   
   prompt += `\n\nENFOQUE TEMÁTICO OBLIGATORIO:
@@ -34,42 +34,57 @@ export async function generateBlogPost(topic: string, context?: string, customCo
   - 🏢 Negocios digitales y emprendimiento tech
 
   VARIEDAD ESTRUCTURAL OBLIGATORIA:
-  NO uses la estructura típica de introducción-desarrollo-conclusión. En su lugar, elige UNA de estas estructuras creativas:
+  NO uses la estructura típica de introducción-desarrollo-conclusión. En su lugar, elige UNA de estas estructuras:
   
-  1. **Formato Historia Personal**: Narra como una experiencia personal o caso de estudio
-  2. **Formato Pregunta-Respuesta**: Estructura como una conversación o entrevista
-  3. **Formato Lista Innovadora**: Crea una lista numerada con análisis profundo
-  4. **Formato Comparativo**: Antes vs. Después, o comparación de enfoques
-  5. **Formato Futuro-Presente**: Comienza describiendo el futuro y regresa al presente
-  6. **Formato Problema-Solución**: Plantea desafíos y múltiples soluciones
+  1. **Formato Lista Analítica**: Enumera y analiza múltiples aspectos del tema
+  2. **Formato Pregunta-Respuesta**: Plantea preguntas clave y respóndelas
+  3. **Formato Comparativo**: Compara diferentes enfoques o tecnologías
+  4. **Formato Futuro-Presente**: Describe tendencias y su impacto actual
+  5. **Formato Problema-Solución**: Identifica desafíos y presenta soluciones
+  6. **Formato Paso a Paso**: Guía práctica con metodología clara
   7. **Formato Tendencias**: Analiza múltiples tendencias convergentes
-  8. **Formato Mitos vs. Realidad**: Desmonta mitos y presenta la verdad
-  9. **Formato Guía Práctica**: Pasos accionables con ejemplos reales
-  10. **Formato Reflexión Filosófica**: Perspectiva profunda sobre implicaciones
+  8. **Formato Mitos vs. Realidad**: Desmonta conceptos erróneos
+  9. **Formato Análisis Profundo**: Disecciona un tema desde múltiples ángulos
+  10. **Formato Impacto**: Examina las implicaciones a corto y largo plazo
+
+  REGLAS ESTRICTAS DE CONTENIDO:
+  - NO inventes experiencias personales, conversaciones o anécdotas
+  - NO incluyas enlaces a imágenes, videos o recursos específicos
+  - NO hagas afirmaciones como "he visto", "he conversado", "en mi experiencia"
+  - NO uses primera persona para experiencias inventadas
+  - SÍ usa datos verificables, estadísticas y tendencias reales del mercado
+  - SÍ menciona empresas, productos y casos de estudio conocidos
+  - SÍ incluye análisis objetivo y basado en evidencia
 
   REQUISITOS DE CALIDAD:
-  - Español nativo, tono conversacional pero profesional
-  - Incluye datos específicos, estadísticas o ejemplos reales cuando sea posible
-  - Usa metáforas y analogías creativas
+  - Español nativo, tono profesional pero accesible
+  - Incluye datos específicos y estadísticas cuando sea posible
+  - Usa metáforas y analogías para explicar conceptos complejos
   - Incluye al menos 3 subtemas específicos relacionados
-  - Integra tendencias actuales (2024)
-  - Perspectiva latinoamericana cuando sea relevante
-  - Incluye elementos visuales descriptivos (para mejorar engagement)
-  - Llamadas a la acción específicas y creativas
+  - Integra tendencias actuales (2024) con fuentes implícitas
+  - Perspectiva global con relevancia para el mercado hispano
   - Longitud: 1000-1500 palabras
-  - Formato markdown con elementos visuales (emojis, listas, citas)
+  - Formato markdown con estructura clara (encabezados, listas, énfasis)
 
-  ORIGINALIDAD GARANTIZADA:
-  - Evita frases clichés y lugares comunes
-  - Incluye perspectivas contraintuitivas o ángulos únicos
-  - Conecta conceptos aparentemente no relacionados
-  - Usa referencias culturales contemporáneas
-  - Incluye predicciones específicas o hipótesis audaces
+  ORIGINALIDAD Y PRECISIÓN:
+  - Evita clichés y lugares comunes
+  - Incluye perspectivas analíticas y datos concretos
+  - Conecta conceptos de manera lógica y fundamentada
+  - Usa terminología técnica apropiada pero explicada
+  - Incluye predicciones basadas en tendencias actuales
+  - Proporciona valor educativo real y actionable
+
+  ESTRUCTURA FINAL:
+  - Título llamativo y específico
+  - Introducción que enganche sin ser sensacionalista
+  - Desarrollo según la estructura elegida
+  - Conclusión con reflexiones y próximos pasos
+  - Llamada a la acción específica y relevante
 
   \nEstructura tu respuesta como JSON con estos campos:
-  - title: Título magnético y específico (máximo 60 caracteres)
-  - summary: Meta descripción que genere curiosidad (máximo 160 caracteres)
-  - content: Contenido completo en markdown siguiendo UNA estructura creativa
+  - title: Título específico y atractivo (máximo 60 caracteres)
+  - summary: Meta descripción informativa (máximo 160 caracteres)
+  - content: Contenido completo en markdown siguiendo UNA estructura
   - tags: 4-6 etiquetas específicas y actuales
   - category: Elige entre: Tecnología, Innovación, Creatividad, Educación, Negocios`
 
@@ -90,14 +105,14 @@ export async function generateBlogPost(topic: string, context?: string, customCo
       messages: [
         {
           role: 'system',
-          content: 'Eres un escritor experto en tecnología e innovación que crea contenido viral y educativo. Tu especialidad es combinar conceptos técnicos con narrativas humanas. Generas contenido variado, nunca repetitivo, siempre enfocado en el futuro digital. Respondes ÚNICAMENTE con JSON válido.',
+          content: 'Eres un analista experto en tecnología e innovación que crea contenido educativo y profesional. Tu especialidad es analizar tendencias, explicar conceptos complejos y proporcionar insights valiosos basados en datos y evidencia. NUNCA inventes experiencias personales. Siempre te basas en información verificable y análisis objetivo. Respondes ÚNICAMENTE con JSON válido.',
         },
         {
           role: 'user',
           content: prompt,
         },
       ],
-      temperature: 0.9,
+      temperature: 0.8,
       max_tokens: 3000,
     })
 
